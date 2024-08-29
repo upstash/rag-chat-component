@@ -1,0 +1,50 @@
+{
+  "name": "ragchat-widget",
+  "version": "0.0.1",
+  "module": "index.ts",
+  "main": "./dist/client/index.mjs",
+  "types": "./dist/client/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/client/index.d.ts",
+      "default": "./dist/client/index.mjs"
+    }
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0",
+    "react": "^18.3.1",
+    "next": "^14.2.5"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "dependencies": {
+    "@radix-ui/react-scroll-area": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
+    "@upstash/rag-chat": "^1.5.0",
+    "@upstash/vector": "^1.1.5",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.3.30",
+    "lodash.debounce": "^4.0.8",
+    "lucide-react": "^0.436.0",
+    "next": "14.2.6",
+    "react": "^18",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7",
+    "tsup": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/lodash.debounce": "^4.0.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  }
+}
