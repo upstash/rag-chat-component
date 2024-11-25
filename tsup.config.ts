@@ -16,6 +16,23 @@ export default defineConfig([
     // 👇 important: do not bundle
     bundle: false,
     minify: false,
+    treeshake: true,
+    injectStyle: true,
+
+  },
+  {
+    entry: ["src/client/styles.css"],
+    outDir: "dist/client",
+    format: "esm",
+    splitting: false,
+    sourcemap: false,
+    clean: false, // Set to false to not clean previous build
+    dts: false,  // No need for .d.ts for CSS
+    bundle: true,
+    minify: false,
+    treeshake: false,
+    loader: { '.css': 'copy' },
+    outExtension: () => ({ js: '.css' }) // This will keep the .css extension
   },
   {
     entry: ["src/server"],

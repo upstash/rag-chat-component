@@ -4,14 +4,12 @@
   "module": "index.ts",
   "main": "./dist/client/index.mjs",
   "types": "./dist/client/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
       "types": "./dist/client/index.d.ts",
       "default": "./dist/client/index.mjs"
-    }
+    },
+    "./styles.css": "./dist/client/styles.css"
   },
   "peerDependencies": {
     "typescript": "^5.0.0",
