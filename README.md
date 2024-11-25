@@ -2,26 +2,18 @@
 
 A customizable React chat widget built on top of the [@upstash/rag-chat SDK](), providing an out-of-the-box solution for adding RAG-powered chat interfaces to your applications.
 
-<div style="display: flex; gap: 20px; margin: 20px 0; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 300px;">
-    <img 
-      src="./public/images/widget-closed.png" 
-      alt="RAG Chat Widget - Closed State" 
-      style="border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"
-      width="300"
-    />
-    <p style="text-align: center; color: #666; margin-top: 8px; font-weight: 600; font-size: 20px;">Closed State</p>
-  </div>
-  <div style="flex: 1; min-width: 300px;">
-    <img 
-      src="./public/images/widget-open.png" 
-      alt="RAG Chat Widget - Open State" 
-      style="border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"
-      width="300"
-    />
-    <p style="text-align: center; color: #666; margin-top: 8px; font-weight: 600; font-size: 20px;">Open State</p>
-  </div>
-</div>
+<table>
+  <tr>
+    <td align="center">
+      <img src="./public/images/widget-closed.png" alt="RAG Chat Widget - Closed State" width="300"/><br/>
+      <em>Closed State</em>
+    </td>
+    <td align="center">
+      <img src="./public/images/widget-open.png" alt="RAG Chat Widget - Open State" width="300"/><br/>
+      <em>Open State</em>
+    </td>
+  </tr>
+</table>
 
 ## Features
 
