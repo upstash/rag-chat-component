@@ -119,7 +119,7 @@ You can also manage your content directly through the Upstash Vector Console:
 3. Navigate to **Databrowser Tab**.
 4. Here, you can either upload a PDF, or use on of our sample datasets.
 
-<img src="./public/images/vector-databrowser.png" alt="Vector Databrowser" width="300"/><br/>
+<img src="./public/images/vector-databrowser.png" alt="Vector Databrowser"/><br/>
 
 </details>
 
