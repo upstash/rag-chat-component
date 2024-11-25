@@ -11,6 +11,9 @@
     },
     "./styles.css": "./dist/client/styles.css"
   },
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "typescript": "^5.0.0",
     "react": "^18.3.1",
