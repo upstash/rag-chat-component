@@ -27,7 +27,7 @@ export default defineConfig([
     splitting: false,
     sourcemap: false,
     clean: false, // Set to false to not clean previous build
-    dts: false,  // No need for .d.ts for CSS
+
     bundle: true,
     minify: false,
     treeshake: false,
