@@ -1,6 +1,6 @@
 {
   "name": "ragchat-widget",
-  "version": "0.0.1",
+  "version": "0.0.2-0",
   "module": "index.ts",
   "main": "./dist/client/index.mjs",
   "types": "./dist/client/index.d.ts",
