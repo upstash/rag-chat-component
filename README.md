@@ -26,12 +26,19 @@ A customizable React chat widget built on top of the [@upstash/rag-chat SDK](), 
 ## Features
 
 🎨 Fully customizable UI components
+
 ⚡ Streaming responses support
+
 📱 Responsive design
+
 🔍 Real-time context retrieval
+
 💾 Persistent chat history
+
 🎯 Built-in rate limiting support
+
 🔄 Loading states and error handling
+
 🎨 Dark/light mode support
 
 ## Installation
