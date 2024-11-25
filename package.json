@@ -1,6 +1,6 @@
 {
   "name": "@upstash/rag-chat-widget",
-  "version": "0.0.2-canary.3",
+  "version": "0.0.2-canary.4",
   "module": "./dist/client/index.mjs",
   "main": "./dist/client/index.mjs",
   "types": "./dist/client/index.d.ts",
