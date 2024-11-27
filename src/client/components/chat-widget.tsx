@@ -212,7 +212,7 @@ export const ChatWidget = () => {
             </CardHeader>
             <CardContent>
               <ScrollArea
-                className="h-[350px] px-4 overflow-auto"
+                className="h-[350px] px-4 overflow-auto overscroll-contain"
                 ref={scrollAreaRef}
               >
                 {!hasMessages && !isLoading && (
