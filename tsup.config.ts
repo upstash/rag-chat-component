@@ -21,20 +21,6 @@ export default defineConfig([
 
   },
   {
-    entry: ["src/client/styles.css"],
-    outDir: "dist/client",
-    format: "esm",
-    splitting: false,
-    sourcemap: false,
-    clean: false, // Set to false to not clean previous build
-
-    bundle: true,
-    minify: false,
-    treeshake: false,
-    loader: { '.css': 'copy' },
-    outExtension: () => ({ js: '.css' }) // This will keep the .css extension
-  },
-  {
     entry: ["src/server"],
     outDir: "dist/server",
     external: ["react", "next"],

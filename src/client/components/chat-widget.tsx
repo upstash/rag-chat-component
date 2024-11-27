@@ -211,7 +211,7 @@ export const ChatWidget = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <ScrollArea className="h-[350px] pr-4" ref={scrollAreaRef}>
+              <div className="h-[350px] pr-4 overflow-auto" ref={scrollAreaRef}>
                 {!hasMessages && !isLoading && (
                   <div className="text-center opacity-50 text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 dark:text-yellow-100">
                     Chat with the AI assistant
@@ -226,7 +226,7 @@ export const ChatWidget = () => {
                   )}
                 </div>
                 <div className="h-[30px]" />
-              </ScrollArea>
+              </div>
             </CardContent>
             <CardFooter>
               <form

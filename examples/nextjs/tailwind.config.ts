@@ -5,7 +5,7 @@ export default {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@upstash/ragchat-widget/**/*.css"
+    "./node_modules/@upstash/rag-chat-widget/**/*.{js,mjs}",
   ],
   theme: {
     extend: {
