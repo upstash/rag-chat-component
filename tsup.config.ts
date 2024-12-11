@@ -16,6 +16,9 @@ export default defineConfig([
     // 👇 important: do not bundle
     bundle: false,
     minify: false,
+    treeshake: true,
+    injectStyle: true,
+
   },
   {
     entry: ["src/server"],
