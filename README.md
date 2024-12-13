@@ -60,7 +60,7 @@ In your `tailwind.config.ts` file, add the configuration below:
 import type { Config } from "tailwindcss";
 
 export default {
-  content: ["./node_modules/@upstash/rag-chat-widget/**/*.{js,mjs}",],
+  content: ["./node_modules/@upstash/rag-chat-widget/**/*.{js,mjs}"],
 } satisfies Config;
 ```
 
