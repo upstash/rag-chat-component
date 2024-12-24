@@ -52,6 +52,13 @@ yarn add @upstash/rag-chat-widget
 
 Set up the environment variables below from your Upstash resources. If you don't have any, you can start by going to [Upstash Console](https://console.upstash.com).
 
+```
+UPSTASH_VECTOR_REST_URL=
+UPSTASH_VECTOR_REST_TOKEN=
+
+OPENAI_API_KEY=
+```
+
 ### 2. Configure Styles
 
 In your `tailwind.config.ts` file, add the configuration below:
@@ -66,12 +73,54 @@ export default {
 
 ### 3. Implementation
 
-```jsx
-import { ChatWidget } from "ragchat-widget";
+The RAG Chat Widget can be integrated into your application using two straightforward approaches. Choose the method that best fits your project structure:
 
-const Component = () => {
+1. Using a Dedicated Component File (Recommended)
+
+Create a seperate component file with the `use client` directive, then import and use it anywhere in your application.
+
+```jsx
+// components/widget.tsx
+"use client";
+
+import { ChatWidget } from "@upstash/rag-chat-widget";
+
+export const Widget = () => {
   return <ChatWidget />;
 };
+```
+
+```jsx
+// page.tsx
+import { Widget } from "./components/widget";
+
+export default function Home(){
+  return (
+    <>
+      <Widget />
+      <p>Home</p>
+    <>
+  )
+}
+```
+
+2. Direct Integration in Client Components
+
+Alternatively, import and use the **ChatWidget** directly in your client-side pages.
+
+```jsx
+// page.tsx
+'use client'
+import { ChatWidget } from "@upstash/rag-chat-widget";
+
+export default function Home(){
+  return (
+    <>
+      <ChatWidget />
+      <p>Home</p>
+    <>
+  )
+}
 ```
 
 ## Adding Content
