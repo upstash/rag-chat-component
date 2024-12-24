@@ -94,13 +94,13 @@ export const Widget = () => {
 // page.tsx
 import { Widget } from "./components/widget";
 
-export default function Home(){
+export default function Home() {
   return (
     <>
       <Widget />
       <p>Home</p>
-    <>
-  )
+    </>
+  );
 }
 ```
 
@@ -110,16 +110,16 @@ Alternatively, import and use the **ChatWidget** directly in your client-side pa
 
 ```jsx
 // page.tsx
-'use client'
+"use client";
 import { ChatWidget } from "@upstash/rag-chat-widget";
 
-export default function Home(){
+export default function Home() {
   return (
     <>
       <ChatWidget />
       <p>Home</p>
-    <>
-  )
+    </>
+  );
 }
 ```
 
