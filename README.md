@@ -1,6 +1,6 @@
 # RAG Chat Widget
 
-A customizable React chat widget (React Server Component) built on top of the [@upstash/rag-chat](https://github.com/upstash/rag-chat) SDK, providing an out-of-the-box solution for adding RAG-powered chat interfaces to your applications.
+A customizable React chat widget built on top of the [@upstash/rag-chat](https://github.com/upstash/rag-chat) SDK, providing an out-of-the-box solution for adding RAG-powered chat interfaces to your applications.
 
 <table>
   <tr>
