@@ -6,9 +6,7 @@
   "types": "./dist/client/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/client/index.d.ts",
-      "import": "./dist/client/index.mjs",
-      "default": "./dist/client/index.mjs"
+      "import": "./dist/client/index.mjs"
     },
     "./styles.css": "./dist/client/styles.mjs"
   },
@@ -46,6 +44,7 @@
     "@types/lodash.debounce": "^4.0.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "esbuild-fix-imports-plugin": "^1.0.8",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }

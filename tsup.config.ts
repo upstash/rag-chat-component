@@ -1,4 +1,5 @@
 import { defineConfig } from "tsup";
+import { fixExtensionsPlugin } from "esbuild-fix-imports-plugin";
 
 export default defineConfig([
   {
@@ -18,7 +19,7 @@ export default defineConfig([
     minify: false,
     treeshake: true,
     injectStyle: true,
-
+    esbuildPlugins: [fixExtensionsPlugin()],
   },
   {
     entry: ["src/server"],
@@ -35,5 +36,6 @@ export default defineConfig([
     // 👇 important: do not bundle
     bundle: false,
     minify: false,
+    esbuildPlugins: [fixExtensionsPlugin()],
   },
 ]);
