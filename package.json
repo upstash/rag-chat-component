@@ -16,7 +16,7 @@
   "peerDependencies": {
     "typescript": "^5.0.0",
     "react": "^18.3.1",
-    "next": "^14.2.5"
+    "next": "^14.2.5 || ^15.0.0"
   },
   "scripts": {
     "build": "tsup"
@@ -32,7 +32,6 @@
     "framer-motion": "^11.3.30",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.436.0",
-    "next": "14.2.6",
     "react": "^18",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.5.2",
