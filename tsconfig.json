@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    // Enable latest features
     "lib": ["ESNext", "DOM"],
     "target": "ESNext",
     "module": "ES2022",
@@ -14,18 +13,15 @@
     "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
 
-    // Bundler mode
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,
 
-    // Best practices
     "strict": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
 
-    // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
