@@ -1,6 +1,6 @@
 # RAG Chat Widget
 
-A customizable React chat widget built on top of the [@upstash/rag-chat](https://github.com/upstash/rag-chat) SDK, providing an out-of-the-box solution for adding RAG-powered chat interfaces to your applications.
+A customizable React chat component built on top of the [@upstash/rag-chat](https://github.com/upstash/rag-chat) SDK, providing an out-of-the-box solution for adding RAG-powered chat interfaces to your applications.
 
 <table>
   <tr>
@@ -50,7 +50,9 @@ yarn add @upstash/rag-chat-widget
 
 ### 1. Environment Variables
 
-Set up the environment variables below from your Upstash resources. If you don't have any, you can start by going to [Upstash Console](https://console.upstash.com).
+Create an Upstash Vector database and set up the environment variables as below. If you don't have an account, you can start by going to [Upstash Console](https://console.upstash.com).
+
+Choose an embedding model when creating an index in Upstash Vector.
 
 ```
 UPSTASH_VECTOR_REST_URL=
