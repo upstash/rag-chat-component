@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { serverChat } from "../../server/chat";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
-import { ArrowUp, Bot, Loader2, User, X } from "lucide-react";
+import { ArrowUp, Bot, Loader2, X } from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
 
 export const ChatWidget = () => {
@@ -86,41 +86,63 @@ export const ChatWidget = () => {
       setIsLoading(false);
       setIsStreaming(false);
     }
+
+    // writeDummyMessage();
+  };
+
+  const writeDummyMessage = async () => {
+    // Mock AI response
+    setIsStreaming(true);
+    const aiMessage: UpstashMessage = {
+      content: "",
+      role: "assistant",
+      id: (Date.now() + 1).toString(),
+    };
+    setMessages((prev) => [...prev, aiMessage]);
+    setTimeout(() => {
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === aiMessage.id
+            ? { ...msg, content: "I'm a bot, I don't know what you mean!" }
+            : msg,
+        ),
+      );
+      setIsLoading(false);
+      setIsStreaming(false);
+    }, 2000);
   };
 
   const renderMessage = (message: UpstashMessage, index: number) => {
     const isLastMessage = index === messages.length - 1;
-    const showDots =
-      isLastMessage && isStreaming && message.role === "assistant";
+    const showDots = isLastMessage && isStreaming;
+    const isUser = message.role === "user";
 
     return (
       <div
         key={index}
         ref={isLastMessage ? lastMessageRef : null}
-        className={`mb-4 flex ${
-          message.role === "user" ? "justify-end" : "justify-start"
-        }`}
+        className={cn("mb-2 flex", isUser ? "justify-end" : "justify-start")}
       >
-        <div
-          className={cn(
-            "flex max-w-[80%] items-start gap-2 rounded-lg px-4 py-2",
-            message.role === "user" ? "bg-black text-white" : "bg-zinc-100",
-          )}
-        >
-          {message.role === "assistant" ? (
-            <Bot className="mt-1 h-5 w-5 flex-shrink-0" />
-          ) : (
-            <User className="mt-1 h-5 w-5 flex-shrink-0" />
-          )}
-          <div>
+        {isUser ? (
+          // User message
+          <div className="rounded-2xl bg-primary px-4 py-2 text-white">
             {message.content}
-            {showDots && (
-              <span className="ml-1 inline-block">
-                <span className="dots animate-pulse">...</span>
-              </span>
-            )}
           </div>
-        </div>
+        ) : (
+          // Assistant message
+          <div className="flex max-w-[90%] items-start gap-3">
+            <Bot size={28} strokeWidth={1.5} className="mt-2 shrink-0" />
+            <div className="relative rounded-2xl bg-zinc-100 px-4 py-2">
+              <span className="absolute -left-1 top-4 size-4 rotate-45 bg-inherit" />
+              {message.content}
+              {showDots && (
+                <span className="ml-1 inline-block">
+                  <span className="dots animate-pulse">...</span>
+                </span>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     );
   };
@@ -135,7 +157,7 @@ export const ChatWidget = () => {
         className={cn(
           "fixed bottom-8 right-8 z-[9999] size-12",
           "flex items-center justify-center p-0",
-          "rounded-full bg-pink-500 text-white shadow-xl",
+          "rounded-full bg-primary text-white shadow-xl",
           "transition-all duration-300 ease-in-out",
           isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
         )}
@@ -146,7 +168,7 @@ export const ChatWidget = () => {
       {/* >>> Chat Modal */}
       <div
         className={cn(
-          "fixed bottom-8 right-8 z-50 w-80 sm:w-96",
+          "fixed bottom-8 right-8 z-50 w-[420px]",
           "rounded-2xl bg-white shadow-2xl",
           "border border-zinc-300 text-black",
           "transition-all duration-300",
@@ -157,15 +179,15 @@ export const ChatWidget = () => {
       >
         {/* Chat Header */}
         <div className="flex items-center justify-between rounded-t-2xl bg-zinc-50 px-5 py-4">
-          <h3 className="text-lg font-semibold">Chat Assistant</h3>
+          <h3 className="text-lg">Chat Assistant</h3>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             {/* clear button */}
             {hasMessages && (
               <Button
                 variant="ghost"
                 size="sm"
-                className=""
+                className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
                 onClick={() => {
                   setMessages([]);
                 }}
@@ -175,8 +197,13 @@ export const ChatWidget = () => {
             )}
 
             {/* close button */}
-            <Button variant="ghost" size="sm" onClick={toggleChat}>
-              <X size={20} className="opacity-50" />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-zinc-400 hover:bg-zinc-200"
+              onClick={toggleChat}
+            >
+              <X size={20} />
             </Button>
           </div>
         </div>
@@ -212,7 +239,7 @@ export const ChatWidget = () => {
           <TextareaAutosize
             className={cn(
               "flex w-full rounded-3xl border bg-transparent px-4 py-3",
-              "focus:outline-none focus:ring-2 focus:ring-pink-500",
+              "focus:outline-none focus:ring-2 focus:ring-primary",
               "disabled:cursor-not-allowed disabled:opacity-50",
               "resize-none",
             )}
@@ -232,10 +259,10 @@ export const ChatWidget = () => {
           />
 
           <Button
-            type="button"
+            type="submit"
             size="icon"
             className={cn(
-              "absolute bottom-6 right-8 z-10",
+              "absolute bottom-6 right-8 z-10 bg-primary",
               (isLoading || isStreaming) && "cursor-not-allowed opacity-50",
             )}
             disabled={isLoading || isStreaming}
