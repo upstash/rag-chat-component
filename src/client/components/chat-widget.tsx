@@ -1,36 +1,16 @@
 "use client";
 
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@radix-ui/react-tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
 import type { UpstashMessage } from "@upstash/rag-chat";
 import { readServerActionStream } from "@upstash/rag-chat/nextjs";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { serverChat } from "../../server/chat";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "./ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
-import {
-  Bot,
-  Loader2,
-  MessageCircle,
-  Moon,
-  Send,
-  Sun,
-  User,
-  X,
-} from "lucide-react";
+import { Bot, Loader2, MessageCircle, Send, User, X } from "lucide-react";
 
 export const ChatWidget = () => {
   const [messages, setMessages] = useState<UpstashMessage[]>([]);
@@ -38,7 +18,6 @@ export const ChatWidget = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const lastMessageRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,18 +28,6 @@ export const ChatWidget = () => {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   };
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [isDarkMode]);
 
   const scrollToBottom = () => {
     if (lastMessageRef.current) {
@@ -108,8 +75,8 @@ export const ChatWidget = () => {
           prev.map((msg) =>
             msg.id === aiMessage.id
               ? { ...msg, content: aiMessage.content }
-              : msg
-          )
+              : msg,
+          ),
         );
       }
     } catch (error) {
@@ -137,8 +104,8 @@ export const ChatWidget = () => {
           className={cn(
             "max-w-[80%] px-4 py-2 rounded-lg flex items-start gap-2",
             message.role === "user"
-              ? "bg-yellow-950 text-white dark:bg-yellow-300 dark:text-yellow-950"
-              : "bg-yellow-100 text-yellow-950 dark:bg-yellow-900 dark:text-yellow-100"
+              ? "bg-yellow-950 text-white "
+              : "bg-yellow-100 text-yellow-950 ",
           )}
         >
           {message.role === "assistant" ? (
@@ -171,40 +138,22 @@ export const ChatWidget = () => {
         >
           <Card
             className={cn(
-              "w-80 sm:w-96 shadow-2xl transition-all duration-300 border border-yellow-700/20 dark:border-yellow-300/20 bg-white dark:bg-gray-900",
-              isOpen ? "translate-y-0" : "translate-y-full"
+              "w-80 sm:w-96 shadow-2xl transition-all duration-300 border border-yellow-700/20  bg-white ",
+              isOpen ? "translate-y-0" : "translate-y-full",
             )}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-lg font-semibold text-yellow-950 dark:text-yellow-100 flex items-center gap-2">
+              <CardTitle
+                className="text-lg font-semibold text-yellow-950  flex items-center gap-2">
                 <Bot className="h-5 w-5" />
                 Chat Assistant
               </CardTitle>
               <div className="flex items-center gap-2">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={toggleDarkMode}
-                      className="hover:bg-yellow-100 dark:hover:bg-yellow-900 rounded-full p-2"
-                    >
-                      {isDarkMode ? (
-                        <Sun className="h-4 w-4 text-yellow-100" />
-                      ) : (
-                        <Moon className="h-4 w-4 text-yellow-950" />
-                      )}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Toggle dark mode</p>
-                  </TooltipContent>
-                </Tooltip>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={toggleChat}
-                  className="hover:bg-red-100 hover:text-red-600 dark:hover:bg-red-900 dark:hover:text-red-400 rounded-full"
+                  className="hover:bg-red-100 hover:text-red-600  rounded-full"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -216,7 +165,8 @@ export const ChatWidget = () => {
                 ref={scrollAreaRef}
               >
                 {!hasMessages && !isLoading && (
-                  <div className="text-center opacity-50 text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 dark:text-yellow-100">
+                  <div
+                    className="text-center opacity-50 bg-primary text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
                     Chat with the AI assistant
                   </div>
                 )}
@@ -224,7 +174,8 @@ export const ChatWidget = () => {
                   {messages.map(renderMessage)}
                   {isLoading && !isStreaming && (
                     <div className="flex justify-center items-center py-2">
-                      <Loader2 className="h-6 w-6 animate-spin text-yellow-950 dark:text-yellow-100" />
+                      <Loader2
+                        className="h-6 w-6 animate-spin text-yellow-950 " />
                     </div>
                   )}
                 </div>
@@ -241,7 +192,7 @@ export const ChatWidget = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask a question..."
-                  className="border placeholder:text-yellow-950/50 dark:placeholder:text-yellow-100/50 border-yellow-700/20 dark:border-yellow-300/20 rounded-md px-4 h-10 w-full focus:border-yellow-950 dark:focus:border-yellow-100 outline-none ring-0 bg-white dark:bg-gray-800 text-yellow-950 dark:text-yellow-100"
+                  className="border placeholder:text-yellow-950/50  border-yellow-700/20  rounded-md px-4 h-10 w-full focus:border-yellow-950  outline-none ring-0 bg-white  text-yellow-950 "
                   disabled={isLoading || isStreaming}
                   ref={inputRef}
                 />
@@ -250,9 +201,9 @@ export const ChatWidget = () => {
                     <Button
                       type="submit"
                       className={cn(
-                        "px-4 h-10 bg-yellow-950 text-white dark:bg-yellow-300 dark:text-yellow-950 rounded-lg",
+                        "px-4 h-10 bg-yellow-950 text-white rounded-lg",
                         (isLoading || isStreaming) &&
-                          "opacity-50 cursor-not-allowed"
+                        "opacity-50 cursor-not-allowed",
                       )}
                       disabled={isLoading || isStreaming}
                     >
@@ -271,7 +222,7 @@ export const ChatWidget = () => {
             </CardFooter>
             {hasMessages && (
               <button
-                className="absolute text-xs bottom-full mb-1 left-4 opacity-50 hover:opacity-100 underline text-yellow-950 dark:text-yellow-100 transition-opacity"
+                className="absolute text-xs bottom-full mb-1 left-4 opacity-50 hover:opacity-100 underline text-yellow-950  transition-opacity"
                 onClick={() => {
                   setMessages([]);
                 }}
@@ -290,7 +241,9 @@ export const ChatWidget = () => {
             <TooltipTrigger asChild>
               <Button
                 onClick={toggleChat}
-                className="rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 bg-yellow-950 text-white dark:bg-yellow-300 dark:text-yellow-950"
+                className="rounded-full p-3 shadow-lg hover:shadow-xl
+                                 transition-all duration-300 bg-red-500
+                                 text-white"
               >
                 <MessageCircle className="h-6 w-6" />
               </Button>
