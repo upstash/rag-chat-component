@@ -23,8 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false
-  },
-  "include": ["src/**/*", "./package.json"],
-  "exclude": ["node_modules"]
+    "noPropertyAccessFromIndexSignature": false,
+    "baseUrl": "./src"
+  }
 }

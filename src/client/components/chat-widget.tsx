@@ -1,5 +1,7 @@
 "use client";
 
+import "./styles.css";
+
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import {
   Tooltip,
@@ -8,9 +10,9 @@ import {
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
 import type { UpstashMessage } from "@upstash/rag-chat";
-import { readServerActionStream } from "@upstash/rag-chat/nextjs";
+// import { readServerActionStream } from "@upstash/rag-chat/nextjs";
 import { useEffect, useRef, useState } from "react";
-import { serverChat } from "../../server/chat";
+// import { serverChat } from "../../server/chat";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
 import {
@@ -70,32 +72,32 @@ export const ChatWidget = () => {
     setInput("");
     setIsLoading(true);
 
-    try {
-      const stream = await serverChat({ userMessage });
-      setIsStreaming(true);
-      let aiMessage: UpstashMessage = {
-        content: "",
-        role: "assistant",
-        id: (Date.now() + 1).toString(),
-      };
-      setMessages((prev) => [...prev, aiMessage]);
-
-      for await (const chunk of readServerActionStream(stream)) {
-        aiMessage.content += chunk;
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === aiMessage.id
-              ? { ...msg, content: aiMessage.content }
-              : msg,
-          ),
-        );
-      }
-    } catch (error) {
-      console.error("Error in AI response:", error);
-    } finally {
-      setIsLoading(false);
-      setIsStreaming(false);
-    }
+    // try {
+    //   const stream = await serverChat({ userMessage });
+    //   setIsStreaming(true);
+    //   let aiMessage: UpstashMessage = {
+    //     content: "",
+    //     role: "assistant",
+    //     id: (Date.now() + 1).toString(),
+    //   };
+    //   setMessages((prev) => [...prev, aiMessage]);
+    //
+    //   for await (const chunk of readServerActionStream(stream)) {
+    //     aiMessage.content += chunk;
+    //     setMessages((prev) =>
+    //       prev.map((msg) =>
+    //         msg.id === aiMessage.id
+    //           ? { ...msg, content: aiMessage.content }
+    //           : msg,
+    //       ),
+    //     );
+    //   }
+    // } catch (error) {
+    //   console.error("Error in AI response:", error);
+    // } finally {
+    //   setIsLoading(false);
+    //   setIsStreaming(false);
+    // }
   };
 
   const renderMessage = (message: UpstashMessage, index: number) => {
@@ -243,26 +245,25 @@ export const ChatWidget = () => {
         </div>
 
         {/* Trigger Button */}
-        <div
-          className={cn(
-            "absolute bottom-5 right-5 transition-all duration-300 ease-in-out",
-            isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
-          )}
-        >
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                onClick={toggleChat}
-                className="rounded-full bg-red-500 p-3 text-white shadow-lg transition-all duration-300 hover:shadow-xl"
-              >
-                <MessageCircle className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Chat with AI</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              onClick={toggleChat}
+              className={cn(
+                "absolute bottom-5 right-5 z-[9999] size-12",
+                "flex items-center justify-center",
+                "rounded-full bg-pink-500 text-white shadow-xl",
+                "transition-all duration-300 ease-in-out",
+                isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
+              )}
+            >
+              <MessageCircle className="h-6 w-6" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Chat with AI</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </TooltipProvider>
   );
