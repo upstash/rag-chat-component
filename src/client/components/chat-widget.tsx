@@ -1,14 +1,25 @@
 "use client";
 
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
 import type { UpstashMessage } from "@upstash/rag-chat";
 import { readServerActionStream } from "@upstash/rag-chat/nextjs";
 import { useEffect, useRef, useState } from "react";
 import { serverChat } from "../../server/chat";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { Input } from "./ui/input";
 import { Bot, Loader2, MessageCircle, Send, User, X } from "lucide-react";
 
@@ -96,27 +107,27 @@ export const ChatWidget = () => {
       <div
         key={index}
         ref={isLastMessage ? lastMessageRef : null}
-        className={`flex mb-4 ${
+        className={`mb-4 flex ${
           message.role === "user" ? "justify-end" : "justify-start"
         }`}
       >
         <div
           className={cn(
-            "max-w-[80%] px-4 py-2 rounded-lg flex items-start gap-2",
+            "flex max-w-[80%] items-start gap-2 rounded-lg px-4 py-2",
             message.role === "user"
-              ? "bg-yellow-950 text-white "
-              : "bg-yellow-100 text-yellow-950 ",
+              ? "bg-yellow-950 text-white"
+              : "bg-yellow-100 text-yellow-950",
           )}
         >
           {message.role === "assistant" ? (
-            <Bot className="h-5 w-5 mt-1 flex-shrink-0" />
+            <Bot className="mt-1 h-5 w-5 flex-shrink-0" />
           ) : (
-            <User className="h-5 w-5 mt-1 flex-shrink-0" />
+            <User className="mt-1 h-5 w-5 flex-shrink-0" />
           )}
           <div>
             {message.content}
             {showDots && (
-              <span className="inline-block ml-1">
+              <span className="ml-1 inline-block">
                 <span className="dots animate-pulse">...</span>
               </span>
             )}
@@ -138,13 +149,13 @@ export const ChatWidget = () => {
         >
           <Card
             className={cn(
-              "w-80 sm:w-96 shadow-2xl transition-all duration-300 border border-yellow-700/20  bg-white ",
+              "w-80 shadow-2xl transition-all duration-300 sm:w-96",
+              "border border-yellow-700/20 bg-white",
               isOpen ? "translate-y-0" : "translate-y-full",
             )}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle
-                className="text-lg font-semibold text-yellow-950  flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-lg font-semibold text-yellow-950">
                 <Bot className="h-5 w-5" />
                 Chat Assistant
               </CardTitle>
@@ -153,7 +164,7 @@ export const ChatWidget = () => {
                   variant="ghost"
                   size="sm"
                   onClick={toggleChat}
-                  className="hover:bg-red-100 hover:text-red-600  rounded-full"
+                  className="rounded-full hover:bg-red-100 hover:text-red-600"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -161,21 +172,19 @@ export const ChatWidget = () => {
             </CardHeader>
             <CardContent>
               <ScrollArea
-                className="h-[350px] px-4 overflow-auto overscroll-contain"
+                className="h-[350px] overflow-auto overscroll-contain px-4"
                 ref={scrollAreaRef}
               >
                 {!hasMessages && !isLoading && (
-                  <div
-                    className="text-center opacity-50 bg-primary text-sm absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-center text-sm opacity-50">
                     Chat with the AI assistant
                   </div>
                 )}
                 <div className="flex flex-col gap-4">
                   {messages.map(renderMessage)}
                   {isLoading && !isStreaming && (
-                    <div className="flex justify-center items-center py-2">
-                      <Loader2
-                        className="h-6 w-6 animate-spin text-yellow-950 " />
+                    <div className="flex items-center justify-center py-2">
+                      <Loader2 className="animate-spin h-6 w-6 text-yellow-950" />
                     </div>
                   )}
                 </div>
@@ -185,14 +194,14 @@ export const ChatWidget = () => {
             <CardFooter>
               <form
                 onSubmit={handleSubmit}
-                className="relative flex gap-2 items-center w-full"
+                className="relative flex w-full items-center gap-2"
               >
                 <Input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask a question..."
-                  className="border placeholder:text-yellow-950/50  border-yellow-700/20  rounded-md px-4 h-10 w-full focus:border-yellow-950  outline-none ring-0 bg-white  text-yellow-950 "
+                  className="h-10 w-full rounded-md border border-yellow-700/20 bg-white px-4 text-yellow-950 outline-none ring-0 placeholder:text-yellow-950/50 focus:border-yellow-950"
                   disabled={isLoading || isStreaming}
                   ref={inputRef}
                 />
@@ -201,14 +210,14 @@ export const ChatWidget = () => {
                     <Button
                       type="submit"
                       className={cn(
-                        "px-4 h-10 bg-yellow-950 text-white rounded-lg",
+                        "h-10 rounded-lg bg-yellow-950 px-4 text-white",
                         (isLoading || isStreaming) &&
-                        "opacity-50 cursor-not-allowed",
+                          "cursor-not-allowed opacity-50",
                       )}
                       disabled={isLoading || isStreaming}
                     >
                       {isLoading || isStreaming ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <Loader2 className="animate-spin h-4 w-4" />
                       ) : (
                         <Send className="h-4 w-4" />
                       )}
@@ -222,7 +231,7 @@ export const ChatWidget = () => {
             </CardFooter>
             {hasMessages && (
               <button
-                className="absolute text-xs bottom-full mb-1 left-4 opacity-50 hover:opacity-100 underline text-yellow-950  transition-opacity"
+                className="absolute bottom-full left-4 mb-1 text-xs text-yellow-950 underline opacity-50 transition-opacity hover:opacity-100"
                 onClick={() => {
                   setMessages([]);
                 }}
@@ -232,18 +241,19 @@ export const ChatWidget = () => {
             )}
           </Card>
         </div>
+
+        {/* Trigger Button */}
         <div
-          className={`transition-all duration-300 ease-in-out absolute right-5 bottom-5 ${
-            isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
-          }`}
+          className={cn(
+            "absolute bottom-5 right-5 transition-all duration-300 ease-in-out",
+            isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
+          )}
         >
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 onClick={toggleChat}
-                className="rounded-full p-3 shadow-lg hover:shadow-xl
-                                 transition-all duration-300 bg-red-500
-                                 text-white"
+                className="rounded-full bg-red-500 p-3 text-white shadow-lg transition-all duration-300 hover:shadow-xl"
               >
                 <MessageCircle className="h-6 w-6" />
               </Button>

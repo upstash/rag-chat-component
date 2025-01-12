@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "declarationDir": "dist",
     "declaration": true,
     "target": "ESNext",
@@ -12,10 +9,7 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "outDir": "./dist",
-    "types": [
-      "react/experimental",
-      "node"
-    ],
+    "types": ["react/experimental", "node"],
     "jsxImportSource": "react",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -31,11 +25,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": [
-    "src/**/*",
-    "./package.json"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*", "./package.json"],
+  "exclude": ["node_modules"]
 }
