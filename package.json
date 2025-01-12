@@ -25,7 +25,6 @@
   "dependencies": {
     "@radix-ui/react-scroll-area": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.1",
-    "@radix-ui/react-tooltip": "^1.1.6",
     "@upstash/rag-chat": "2.0.3",
     "@upstash/vector": "^1.2.0",
     "class-variance-authority": "^0.7.1",
@@ -33,7 +32,8 @@
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.471.0",
     "react": "^19",
-    "react-dom": "^19"
+    "react-dom": "^19",
+    "react-textarea-autosize": "^8.5.7"
   },
   "devDependencies": {
     "@types/bun": "latest",
