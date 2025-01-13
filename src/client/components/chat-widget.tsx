@@ -3,18 +3,19 @@
 import "./styles.css";
 
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import type { UpstashMessage } from "@upstash/rag-chat";
-import { readServerActionStream } from "@upstash/rag-chat/nextjs";
+
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
-import { serverChat } from "../../server/chat";
+import { serverChat, type Message } from "../../server/chat";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
 import { ArrowUp, Bot, Loader2, X } from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
 
+import { readStreamableValue } from "ai/rsc";
+
 export const ChatWidget = () => {
-  const [messages, setMessages] = useState<UpstashMessage[]>([]);
+  const [conversation, setConversation] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,7 @@ export const ChatWidget = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [conversation]);
 
   useEffect(() => {
     if (isStreaming) {
@@ -51,28 +52,31 @@ export const ChatWidget = () => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMessage: UpstashMessage = {
+    const userMessage: Message = {
       content: input,
       role: "user",
       id: Date.now().toString(),
     };
-    setMessages((prev) => [...prev, userMessage]);
+
+    const newConversation = [...conversation, userMessage];
+    setConversation(newConversation);
+    console.log(newConversation);
     setInput("");
     setIsLoading(true);
 
     try {
-      const stream = await serverChat({ userMessage });
+      const { output } = await serverChat({ history: newConversation });
       setIsStreaming(true);
-      let aiMessage: UpstashMessage = {
+      let aiMessage: Message = {
         content: "",
         role: "assistant",
         id: (Date.now() + 1).toString(),
       };
-      setMessages((prev) => [...prev, aiMessage]);
+      setConversation((prev) => [...prev, aiMessage]);
 
-      for await (const chunk of readServerActionStream(stream)) {
+      for await (const chunk of readStreamableValue(output)) {
         aiMessage.content += chunk;
-        setMessages((prev) =>
+        setConversation((prev) =>
           prev.map((msg) =>
             msg.id === aiMessage.id
               ? { ...msg, content: aiMessage.content }
@@ -86,34 +90,10 @@ export const ChatWidget = () => {
       setIsLoading(false);
       setIsStreaming(false);
     }
-
-    // writeDummyMessage();
   };
 
-  const writeDummyMessage = async () => {
-    // Mock AI response
-    setIsStreaming(true);
-    const aiMessage: UpstashMessage = {
-      content: "",
-      role: "assistant",
-      id: (Date.now() + 1).toString(),
-    };
-    setMessages((prev) => [...prev, aiMessage]);
-    setTimeout(() => {
-      setMessages((prev) =>
-        prev.map((msg) =>
-          msg.id === aiMessage.id
-            ? { ...msg, content: "I'm a bot, I don't know what you mean!" }
-            : msg,
-        ),
-      );
-      setIsLoading(false);
-      setIsStreaming(false);
-    }, 2000);
-  };
-
-  const renderMessage = (message: UpstashMessage, index: number) => {
-    const isLastMessage = index === messages.length - 1;
+  const renderMessage = (message: Message, index: number) => {
+    const isLastMessage = index === conversation.length - 1;
     const showDots = isLastMessage && isStreaming;
     const isUser = message.role === "user";
 
@@ -125,7 +105,7 @@ export const ChatWidget = () => {
       >
         {isUser ? (
           // User message
-          <div className="rounded-2xl bg-primary px-4 py-2 text-white">
+          <div className="rounded-2xl bg-emerald-500 px-4 py-2 text-white">
             {message.content}
           </div>
         ) : (
@@ -147,7 +127,7 @@ export const ChatWidget = () => {
     );
   };
 
-  const hasMessages = messages.length > 0;
+  const hasMessages = conversation.length > 0;
 
   return (
     <>
@@ -157,7 +137,7 @@ export const ChatWidget = () => {
         className={cn(
           "fixed bottom-8 right-8 z-[9999] size-12",
           "flex items-center justify-center p-0",
-          "rounded-full bg-primary text-white shadow-xl",
+          "rounded-full bg-emerald-500 text-white shadow-xl",
           "transition-all duration-300 ease-in-out",
           isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
         )}
@@ -189,7 +169,7 @@ export const ChatWidget = () => {
                 size="sm"
                 className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
                 onClick={() => {
-                  setMessages([]);
+                  setConversation([]);
                 }}
               >
                 Clear
@@ -222,7 +202,7 @@ export const ChatWidget = () => {
 
           {/* chat bubbles */}
           <div className="flex flex-col gap-4">
-            {messages.map(renderMessage)}
+            {conversation.map(renderMessage)}
             {isLoading && !isStreaming && (
               <div className="flex items-center justify-center py-2">
                 <Loader2 className="animate-spin h-6 w-6" />
