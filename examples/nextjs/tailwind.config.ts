@@ -7,13 +7,4 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@upstash/rag-chat-widget/**/*.{js,mjs}",
   ],
-  theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
-  },
-  plugins: [],
 } satisfies Config;
