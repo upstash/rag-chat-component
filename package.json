@@ -1,6 +1,6 @@
 {
   "name": "@upstash/rag-chat-widget",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "module": "index.ts",
   "main": "./dist/client/index.mjs",
   "types": "./dist/client/index.d.ts",
