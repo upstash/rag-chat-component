@@ -61,6 +61,9 @@ UPSTASH_VECTOR_REST_TOKEN=
 OPENAI_API_KEY=
 
 TOGETHER_API_KEY=
+
+# Optional
+TOGETHER_MODEL=
 ```
 
 ### 2. Configure Styles
@@ -125,6 +128,15 @@ export default function Home() {
     </>
   );
 }
+```
+
+### 4. Choosing Chat Model
+
+It's possible to choose one of the [together.ai](https://www.together.ai/) models for the chat.
+Default model is `meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo`. You can configure it in the environment variables.
+
+```
+TOGETHER_MODEL="deepseek-ai/DeepSeek-V3"
 ```
 
 ## Adding Content

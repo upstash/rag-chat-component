@@ -11,6 +11,7 @@ import { Index } from "@upstash/vector"
 import { createOpenAI } from "@ai-sdk/openai"
 import { streamText } from "ai"
 import { createStreamableValue, type StreamableValue } from "ai/rsc";
+import { DEFAULT_PROMPT } from "./constants";
 
 const vectorIndex = new Index()
 
@@ -43,13 +44,15 @@ export const serverChat: (args: {
 
     const context = similarDocs.map(doc => doc.data).join("\n")
 
-    const system = `You are a helpful assistant. Use the following context to answer the question accurately: ${context}`;
+    const chatHistory = history.map(message => message.content).join("\n")
+
+    const system = DEFAULT_PROMPT({ context, question: userMessage.content, chatHistory })
 
     const stream = createStreamableValue("");
 
     (async () => {
       const { textStream } = streamText({
-        model: together(process.env.UPSTASH_WIDGET_MODEL ?? "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"),
+        model: together(process.env.TOGETHER_MODEL ?? "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"),
         system,
         messages: history,
       })
