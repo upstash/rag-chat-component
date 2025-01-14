@@ -1,7 +1,5 @@
 "use client";
 
-import "./styles.css";
-
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 import * as React from "react";
