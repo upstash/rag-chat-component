@@ -17,7 +17,7 @@ export default defineConfig([
     // 👇 important: do not bundle
     bundle: false,
     minify: false,
-    treeshake: true,
+    treeshake: false,
     injectStyle: true,
     esbuildPlugins: [fixExtensionsPlugin()],
   },
