@@ -1,6 +1,6 @@
 # RAG Chat Widget
 
-A customizable React chat component built on top of the [@upstash/rag-chat](https://github.com/upstash/rag-chat) SDK, providing an out-of-the-box solution for adding RAG-powered chat interfaces to your applications.
+A customizable Reach chat widget that combines Upstash Vector for similarity search, Together AI for LLM, and Vercel AI SDK for streaming responses. This ready-to-use component provides an out of the box solution for adding RAG-Powered chat interfaces to your Next.js application.
 
 <table>
   <tr>
@@ -17,9 +17,9 @@ A customizable React chat component built on top of the [@upstash/rag-chat](http
 
 ## Features
 
-🎨 Fully customizable UI components
-
 ⚡ Streaming responses support
+
+💻 Server actions
 
 📱 Responsive design
 
@@ -27,9 +27,7 @@ A customizable React chat component built on top of the [@upstash/rag-chat](http
 
 💾 Persistent chat history
 
-🎯 Built-in rate limiting support
-
-🔄 Loading states and error handling
+🎨 Fully customizable UI components
 
 🎨 Dark/light mode support
 
@@ -82,7 +80,7 @@ export default {
 
 The RAG Chat Widget can be integrated into your application using two straightforward approaches. Choose the method that best fits your project structure:
 
-1. Using a Dedicated Component File (Recommended)
+#### 1. Using a Dedicated Component File (Recommended)
 
 Create a seperate component file with the `use client` directive, then import and use it anywhere in your application.
 
@@ -111,7 +109,7 @@ export default function Home() {
 }
 ```
 
-2. Direct Integration in Client Components
+#### 2. Direct Integration in Client Components
 
 Alternatively, import and use the **ChatWidget** directly in your client-side pages.
 
