@@ -8,7 +8,7 @@ export default function Home() {
       <Chat />
       <main className="row-start-2 flex max-w-3xl flex-col items-center gap-12 text-center">
         <div className="space-y-4">
-          <h1 className="bg-gradient-to-r from-emerald-500/80 to-emerald-500 bg-clip-text text-4xl font-bold text-transparent sm:text-6xl">
+          <h1 className="bg-gradient-to-r from-emerald-500/80 to-emerald-500 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl">
             AI Chat Widget for Next.js
           </h1>
           <p className="text-lg text-zinc-800 sm:text-xl">
@@ -36,9 +36,9 @@ export default function Home() {
           />
         </div>
 
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
+        <div className="flex flex-col items-center gap-4">
           <a
-            className="hover:bg-primary-600 flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-white transition-colors"
+            className="flex h-12 items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 text-white transition-colors hover:bg-emerald-600"
             href="https://github.com/your-repo"
             target="_blank"
             rel="noopener noreferrer"
@@ -66,16 +66,19 @@ export default function Home() {
           href="https://github.com/your-repo"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 hover:text-primary"
+          className="flex items-center gap-1 hover:text-emerald-500 hover:underline"
         >
           GitHub <ArrowUpRight size={14} />
         </a>
-        <a href="/docs" className="flex items-center gap-1 hover:text-primary">
+        <a
+          href="/docs"
+          className="flex items-center gap-1 hover:text-emerald-500 hover:underline"
+        >
           Documentation <ArrowUpRight size={14} />
         </a>
         <a
           href="/examples"
-          className="flex items-center gap-1 hover:text-primary"
+          className="flex items-center gap-1 hover:text-emerald-500 hover:underline"
         >
           Examples <ArrowUpRight size={14} />
         </a>
