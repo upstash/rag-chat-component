@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@keyframes anim-zoom {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 2000px;
+    height: 2000px;
+    opacity: 0;
+  }
+}
+
+.pulse {
+  @apply rounded-full border-[60px] opacity-0 border-emerald-500/20 absolute left-0 right-0 -translate-x-1/2 -translate-y-1/2;
+  animation: anim-zoom 40s ease infinite
+}
