@@ -5,14 +5,13 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import { serverChat } from "../../server/actions/chat";
-import { getHistory, deleteHistory } from "../../server/actions/history";
+import { deleteHistory, getHistory } from "../../server/actions/history";
 
 import type { Message } from "../../server/lib/types";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
 import { ArrowUp, Bot, Loader2, X } from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
-
 import { readStreamableValue } from "ai/rsc";
 
 export const ChatComponent = () => {
@@ -176,7 +175,7 @@ export const ChatComponent = () => {
   const hasMessages = conversation.length > 0;
 
   return (
-    <>
+    <div className="rcc">
       {/* >>> Trigger Button */}
       <Button
         onClick={toggleChat}
@@ -194,7 +193,7 @@ export const ChatComponent = () => {
       {/* >>> Chat Modal */}
       <div
         className={cn(
-          "fixed bottom-8 right-8 z-50 w-[420px]",
+          "fixed bottom-8 right-8 z-50 w-[420px] antialiased",
           "rounded-2xl bg-white shadow-2xl",
           "border border-zinc-300 text-black",
           "transition-all duration-300",
@@ -204,45 +203,52 @@ export const ChatComponent = () => {
         )}
       >
         {/* Chat Header */}
-        <div className="flex items-center justify-between rounded-t-2xl bg-zinc-50 px-5 py-4">
-          <h3 className="text-lg">Chat Assistant</h3>
+        <header className="rounded-t-2xl border-b border-b-zinc-100 bg-zinc-50 px-6 py-5">
+          {/* close button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute right-4 top-4 opacity-30 hover:bg-zinc-300 hover:opacity-100"
+            onClick={toggleChat}
+          >
+            <X size={20} strokeWidth="1.5" />
+          </Button>
 
-          <div className="flex items-center">
-            {/* clear button */}
-            {hasMessages && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
-                onClick={() => {
-                  handleClearHistory();
-                }}
+          {/* header */}
+          <div>
+            <h3 className="text-lg font-semibold">Chat Assistant</h3>
+            <h5 className="inline-flex items-center gap-1 text-sm text-zinc-500">
+              Powered by{" "}
+              <a
+                href="http://upstash.com"
+                target="_blank"
+                className="underline"
               >
-                Clear
-              </Button>
-            )}
-
-            {/* close button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-zinc-400 hover:bg-zinc-200"
-              onClick={toggleChat}
-            >
-              <X size={20} />
-            </Button>
+                Upstash
+              </a>{" "}
+              and{" "}
+              <a
+                href="http://together.ai"
+                target="_blank"
+                className="underline"
+              >
+                TogetherAI
+              </a>
+            </h5>
           </div>
-        </div>
+        </header>
 
         {/* Chat Body */}
         <ScrollArea
-          className="h-[420px] overflow-auto overscroll-contain p-5"
+          className="h-[420px] overflow-auto overscroll-contain p-6"
           ref={scrollAreaRef}
         >
           {/* empty message */}
           {!hasMessages && !isLoading && (
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center opacity-50">
-              Chat with the AI assistant
+            <div className="flex h-full items-center justify-center text-center text-sm">
+              <span className="rounded-xl bg-zinc-50 p-4 text-zinc-500">
+                Chat with the AI assistant
+              </span>
             </div>
           )}
 
@@ -255,13 +261,10 @@ export const ChatComponent = () => {
               </div>
             )}
           </div>
-
-          {/* empty div for scrolling */}
-          <div className="h-[30px]" />
         </ScrollArea>
 
         {/* Chat Form */}
-        <form onSubmit={handleSubmit} className="relative px-5 py-4">
+        <form onSubmit={handleSubmit} className="relative p-6">
           <TextareaAutosize
             className={cn(
               "flex w-full rounded-3xl border bg-transparent px-4 py-3",
@@ -299,8 +302,21 @@ export const ChatComponent = () => {
               <ArrowUp size={20} className="" />
             )}
           </Button>
+
+          {/* clear button */}
+          {/*<Button
+            variant="ghost"
+            size="sm"
+            className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
+            disabled={hasMessages}
+            onClick={() => {
+              handleClearHistory();
+            }}
+          >
+            Clear
+          </Button>*/}
         </form>
       </div>
-    </>
+    </div>
   );
 };
