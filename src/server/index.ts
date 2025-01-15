@@ -1,1 +1,1 @@
-export { serverChat } from "./chat";
+export { serverChat } from "./actions/chat";

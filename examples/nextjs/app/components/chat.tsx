@@ -1,6 +1,6 @@
 "use client";
 
-import { ChatWidget } from "@upstash/rag-chat-widget";
+import { ChatWidget } from "../../../../src/client";
 
 export const Chat = () => {
   return <ChatWidget />;

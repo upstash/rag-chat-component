@@ -4,7 +4,9 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
-import { serverChat, type Message } from "../../server/chat";
+import { serverChat, getHistory, deleteHistory } from "../../server/actions";
+
+import type { Message } from "../../server/lib/types";
 import { cn } from "./lib/utils";
 import { Button } from "./ui/button";
 import { ArrowUp, Bot, Loader2, X } from "lucide-react";
@@ -14,6 +16,7 @@ import { readStreamableValue } from "ai/rsc";
 
 export const ChatWidget = () => {
   const [conversation, setConversation] = useState<Message[]>([]);
+  const [sessionId, setSessionId] = useState<string>("");
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +37,33 @@ export const ChatWidget = () => {
       lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    let id = localStorage.getItem("chat_session_id");
+    if (!id) {
+      id = "session_" + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem("chat_session_id", id);
+    }
+    setSessionId(id);
+
+    const fetchHistory = async () => {
+      try {
+        setIsLoading(true);
+        const { messages } = await getHistory(id);
+        if (messages.length > 0) {
+          setConversation(messages);
+        }
+        console.log(messages);
+      } catch (error) {
+        console.error("Error fetching chat history:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    console.log("fetching history");
+    fetchHistory();
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -58,12 +88,14 @@ export const ChatWidget = () => {
 
     const newConversation = [...conversation, userMessage];
     setConversation(newConversation);
-    console.log(newConversation);
     setInput("");
     setIsLoading(true);
 
     try {
-      const { output } = await serverChat({ history: newConversation });
+      const { output } = await serverChat({
+        messages: newConversation,
+        sessionId,
+      });
       setIsStreaming(true);
       let aiMessage: Message = {
         content: "",
@@ -87,6 +119,22 @@ export const ChatWidget = () => {
     } finally {
       setIsLoading(false);
       setIsStreaming(false);
+    }
+  };
+
+  const handleClearHistory = async () => {
+    if (!sessionId || isLoading) return;
+
+    setIsLoading(true);
+    try {
+      const { success } = await deleteHistory(sessionId);
+      if (success) {
+        setConversation([]);
+      }
+    } catch (error) {
+      console.error("Error clearing chat history:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -167,7 +215,7 @@ export const ChatWidget = () => {
                 size="sm"
                 className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
                 onClick={() => {
-                  setConversation([]);
+                  handleClearHistory();
                 }}
               >
                 Clear
