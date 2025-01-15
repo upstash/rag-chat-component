@@ -5,11 +5,11 @@ A customizable Reach chat component that combines Upstash Vector for similarity 
 <table>
   <tr>
     <td align="center">
-      <img src="./public/images/widget-closed.png" alt="RAG Chat Component - Closed State" width="300"/><br/>
+      <img src="https://raw.githubusercontent.com/upstash/rag-chat-component/refs/heads/master/public/images/widget-closed.png" alt="RAG Chat Component - Closed State" width="300"/><br/>
       <em>Closed State</em>
     </td>
     <td align="center">
-      <img src="./public/images/widget-open.png" alt="RAG Chat Component - Open State" width="300"/><br/>
+      <img src="https://raw.githubusercontent.com/upstash/rag-chat-component/refs/heads/master/public/images/widget-open.png" alt="RAG Chat Component - Open State" width="300"/><br/>
       <em>Open State</em>
     </td>
   </tr>
