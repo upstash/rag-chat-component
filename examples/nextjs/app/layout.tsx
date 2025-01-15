@@ -27,7 +27,7 @@ export default function RootLayout({
       lang="en"
       className={`antialiased ${defaultFont.variable} ${displayFont.variable}`}
     >
-      <body className="bg-gradient-to-br from-emerald-50 font-sans text-emerald-900">
+      <body className="bg-gradient-to-br from-emerald-50 pb-32 font-sans text-emerald-900">
         {children}
       </body>
     </html>

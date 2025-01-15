@@ -3,11 +3,11 @@ import Image from "next/image";
 export default function Header() {
   return (
     <header className="">
-      <h1 className="text-balance font-display text-4xl font-bold tracking-tight sm:text-6xl">
+      <h1 className="text-balance font-display text-4xl font-semibold tracking-tight sm:text-6xl">
         AI Chat Component for Next.js
       </h1>
 
-      <p className="mt-4 text-balance px-6 text-lg opacity-80 sm:text-xl">
+      <p className="mt-4 text-balance px-6 font-display text-xl opacity-80 sm:text-2xl">
         A modern, customizable chat interface with streaming responses and RAG
         capabilities
       </p>
