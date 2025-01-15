@@ -14,7 +14,7 @@ import TextareaAutosize from "react-textarea-autosize";
 
 import { readStreamableValue } from "ai/rsc";
 
-export const ChatWidget = () => {
+export const ChatComponent = () => {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [sessionId, setSessionId] = useState<string>("");
   const [input, setInput] = useState<string>("");

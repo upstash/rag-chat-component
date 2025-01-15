@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
 
-import { ChatWidget } from "./client";
+import { ChatComponent } from "./client";
 
-ReactDOM.createRoot(document.querySelector("#root")!).render(<ChatWidget />);
+ReactDOM.createRoot(document.querySelector("#root")!).render(<ChatComponent />);

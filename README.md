@@ -1,15 +1,15 @@
-# RAG Chat Widget
+# RAG Chat Component
 
-A customizable Reach chat widget that combines Upstash Vector for similarity search, Together AI for LLM, and Vercel AI SDK for streaming responses. This ready-to-use component provides an out of the box solution for adding RAG-Powered chat interfaces to your Next.js application.
+A customizable Reach chat component that combines Upstash Vector for similarity search, Together AI for LLM, and Vercel AI SDK for streaming responses. This ready-to-use component provides an out of the box solution for adding RAG-Powered chat interfaces to your Next.js application.
 
 <table>
   <tr>
     <td align="center">
-      <img src="./public/images/widget-closed.png" alt="RAG Chat Widget - Closed State" width="300"/><br/>
+      <img src="./public/images/widget-closed.png" alt="RAG Chat Component - Closed State" width="300"/><br/>
       <em>Closed State</em>
     </td>
     <td align="center">
-      <img src="./public/images/widget-open.png" alt="RAG Chat Widget - Open State" width="300"/><br/>
+      <img src="./public/images/widget-open.png" alt="RAG Chat Component - Open State" width="300"/><br/>
       <em>Open State</em>
     </td>
   </tr>
@@ -35,13 +35,13 @@ A customizable Reach chat widget that combines Upstash Vector for similarity sea
 
 ```bash
 # Using npm
-npm install @upstash/rag-chat-widget
+npm install @upstash/rag-chat-component
 
 # Using pnpm
-pnpm add @upstash/rag-chat-widget
+pnpm add @upstash/rag-chat-component
 
 # Using yarn
-yarn add @upstash/rag-chat-widget
+yarn add @upstash/rag-chat-component
 ```
 
 ## Quick Start
@@ -72,37 +72,37 @@ In your `tailwind.config.ts` file, add the configuration below:
 import type { Config } from "tailwindcss";
 
 export default {
-  content: ["./node_modules/@upstash/rag-chat-widget/**/*.{js,mjs}"],
+  content: ["./node_modules/@upstash/rag-chat-component/**/*.{js,mjs}"],
 } satisfies Config;
 ```
 
 ### 3. Implementation
 
-The RAG Chat Widget can be integrated into your application using two straightforward approaches. Choose the method that best fits your project structure:
+The RAG Chat Component can be integrated into your application using two straightforward approaches. Choose the method that best fits your project structure:
 
 #### 1. Using a Dedicated Component File (Recommended)
 
 Create a seperate component file with the `use client` directive, then import and use it anywhere in your application.
 
 ```jsx
-// components/widget.tsx
+// components/chat.tsx
 "use client";
 
-import { ChatWidget } from "@upstash/rag-chat-widget";
+import { ChatComponent } from "@upstash/rag-chat-component";
 
-export const Widget = () => {
-  return <ChatWidget />;
+export const Chat = () => {
+  return <ChatComponent />;
 };
 ```
 
 ```jsx
 // page.tsx
-import { Widget } from "./components/widget";
+import { Chat } from "./components/chat";
 
 export default function Home() {
   return (
     <>
-      <Widget />
+      <Chat />
       <p>Home</p>
     </>
   );
@@ -111,17 +111,17 @@ export default function Home() {
 
 #### 2. Direct Integration in Client Components
 
-Alternatively, import and use the **ChatWidget** directly in your client-side pages.
+Alternatively, import and use the **ChatComponent** directly in your client-side pages.
 
 ```jsx
 // page.tsx
 "use client";
-import { ChatWidget } from "@upstash/rag-chat-widget";
+import { ChatComponent } from "@upstash/rag-chat-component";
 
 export default function Home() {
   return (
     <>
-      <ChatWidget />
+      <ChatComponent />
       <p>Home</p>
     </>
   );
@@ -139,7 +139,7 @@ TOGETHER_MODEL="deepseek-ai/DeepSeek-V3"
 
 ## Adding Content
 
-You can add content to your RAG Chat widget in several ways:
+You can add content to your RAG Chat component in several ways:
 
 <details>
 <summary>1. Using RAG Chat SDK</summary>
