@@ -53,7 +53,6 @@ export const ChatComponent = () => {
         if (messages.length > 0) {
           setConversation(messages);
         }
-        console.log(messages);
       } catch (error) {
         console.error("Error fetching chat history:", error);
       } finally {
