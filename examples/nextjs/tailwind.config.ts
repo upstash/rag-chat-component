@@ -7,4 +7,12 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@upstash/rag-chat-component/**/*.{js,mjs}",
   ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        display: ["var(--font-display)"],
+      },
+    },
+  },
 } satisfies Config;
