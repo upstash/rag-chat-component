@@ -1,6 +1,6 @@
 'use server'
 
-import { getHistoryClient } from "../lib/history";
+import { getHistoryClient } from "../lib/history/get-client";
 import type { Message } from "../lib/types";
 
 const history = getHistoryClient();

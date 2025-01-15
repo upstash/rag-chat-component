@@ -8,7 +8,7 @@ import { streamText } from "ai"
 import { createStreamableValue, type StreamableValue } from "ai/rsc";
 import { DEFAULT_PROMPT } from "../constants";
 import type { Message } from "../lib/types";
-import { getHistoryClient } from "../lib/history";
+import { getHistoryClient } from "../lib/history/get-client";
 
 const vectorIndex = new Index()
 
