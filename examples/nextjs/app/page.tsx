@@ -36,13 +36,8 @@ export default function Home() {
                         <circle opacity="0.05" cx="1150" cy="1150" r="1449" stroke="currentColor"
                                 strokeWidth="45"/>
                     </svg>*/}
-                    <span
-                        className="pulse"/>
-                    <span
-                        style={{
-                            animationDelay: "5s"
-                        }}
-                        className="pulse"/>
+                    <span className="pulse"/>
+                    <span style={{animationDelay: "5s"}} className="pulse"/>
                     <span
                         style={{
                             animationDelay: "10s"
@@ -68,11 +63,7 @@ export default function Home() {
                             animationDelay: "30s"
                         }}
                         className="pulse"/>
-                    <span
-                        style={{
-                            animationDelay: "35s"
-                        }}
-                        className="pulse"/>
+                    <span style={{animationDelay: "35s"}} className="pulse"/>
                 </div>
             </div>
 
@@ -161,7 +152,7 @@ function FeatureCard({
     description: string;
 }) {
     return (
-        <div className="rounded-xl bg-white border shadow-sm px-8 py-6">
+        <div className="rounded-xl bg-white/30 backdrop-blur border shadow-sm px-8 py-6">
             <h3 className="font-bold">{title}</h3>
             <p className="mt-1 text-zinc-600">{description}</p>
         </div>
