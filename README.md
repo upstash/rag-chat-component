@@ -56,6 +56,10 @@ Choose an embedding model when creating an index in Upstash Vector.
 UPSTASH_VECTOR_REST_URL=
 UPSTASH_VECTOR_REST_TOKEN=
 
+# Optional for persistent chat history
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+
 OPENAI_API_KEY=
 
 TOGETHER_API_KEY=
