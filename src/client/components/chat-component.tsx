@@ -4,7 +4,8 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
-import { serverChat, getHistory, deleteHistory } from "../../server/actions";
+import { serverChat } from "../../server/actions/chat";
+import { getHistory, deleteHistory } from "../../server/actions/history";
 
 import type { Message } from "../../server/lib/types";
 import { cn } from "./lib/utils";
