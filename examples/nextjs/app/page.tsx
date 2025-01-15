@@ -9,7 +9,7 @@ export default function Home() {
       <main className="row-start-2 flex max-w-3xl flex-col items-center gap-12 text-center">
         <div className="space-y-4">
           <h1 className="bg-gradient-to-r from-emerald-500/80 to-emerald-500 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl">
-            AI Chat Widget for Next.js
+            AI Chat Component for Next.js
           </h1>
           <p className="text-lg text-zinc-800 sm:text-xl">
             A modern, customizable chat interface with streaming responses and
