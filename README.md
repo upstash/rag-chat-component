@@ -146,49 +146,40 @@ TOGETHER_MODEL="deepseek-ai/DeepSeek-V3"
 You can add content to your RAG Chat component in several ways:
 
 <details>
-<summary>1. Using RAG Chat SDK</summary>
+<summary>1. Using Upstash Vector SDK</summary>
 
-The SDK provides methods to add various types of content programmatically:
+  Upstash has Vector SDKs in JS and Python. You can use those SDK to insert data to your Vector index.
+  
+[Vector JS SDK](https://github.com/upstash/vector-js)
 
-```ts
-import { RAGChat, openai } from "@upstash/rag-chat";
+[Vector Python SDK](https://github.com/upstash/vector-py)
 
-export const ragChat = new RAGChat({
-  model: openai("gpt-4-turbo"),
-});
-// Add text content
-await ragChat.context.add("Your text content here");
+For other languages you can use [Vector REST API](https://upstash.com/docs/vector/api/get-started).
 
-// Add PDF documents
-await ragChat.context.add({
-  type: "pdf",
-  fileSource: "./path/to/document.pdf",
-});
-
-// Add web content
-await ragChat.context.add({
-  type: "html",
-  source: "https://your-website.com",
-});
-```
-
-For more detailed examples and options, check out the [RAG Chat documentation](https://upstash.com/docs/vector/sdks/rag-chat/gettingstarted).
-
+  
 </details>
 
 <details>
 <summary>2. Using Upstash Vector UI</summary>
 
-You can also manage your content directly through the Upstash Vector Console:
+For testing purpose, you can add your data directly through the Upstash Vector Console:
 
 1. Navigate to [Upstash Console](http://console.upstash.com/vector).
 2. Go to details page of the Vector database.
-3. Navigate to **Databrowser Tab**.
-4. Here, you can either upload a PDF, or use on of our sample datasets.
+3. Navigate to **Data Browser Tab**.
+4. Here, you can upsert data or upload a PDF.
 
 <img src="./public/images/vector-databrowser.png" alt="Vector Databrowser"/><br/>
 
 </details>
+
+<details>
+<summary>3. docs2vector tool</summary>
+
+If you are planning to insert your documentation (markdown files) to your Vector index, then you can use [docs2vector](https://github.com/upstash/docs2vector/) tool.
+
+</details>
+
 
 ## Contributing
 
