@@ -2,6 +2,10 @@
 const config = {
   plugins: {
     tailwindcss: {},
+    autoprefixer: {},
+    "postcss-prefix-selector": {
+      prefix: ".ups-chat",
+    },
   },
 };
 
