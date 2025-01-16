@@ -291,7 +291,7 @@ export const ChatComponent = () => {
             type="submit"
             size="icon"
             className={cn(
-              "absolute bottom-6 right-8 z-10 bg-emerald-500",
+              "absolute bottom-8 right-8 z-10 bg-emerald-500",
               (isLoading || isStreaming) && "cursor-not-allowed opacity-50",
             )}
             disabled={isLoading || isStreaming}
@@ -304,7 +304,7 @@ export const ChatComponent = () => {
           </Button>
 
           {/* clear button */}
-          {/*<Button
+          {/* <Button
             variant="ghost"
             size="sm"
             className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
@@ -314,7 +314,7 @@ export const ChatComponent = () => {
             }}
           >
             Clear
-          </Button>*/}
+          </Button> */}
         </form>
       </div>
     </div>
