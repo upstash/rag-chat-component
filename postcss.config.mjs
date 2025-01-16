@@ -4,7 +4,7 @@ const config = {
     tailwindcss: {},
     autoprefixer: {},
     "postcss-prefix-selector": {
-      prefix: ".rcc",
+      prefix: ".ups-chat",
     },
   },
 };
