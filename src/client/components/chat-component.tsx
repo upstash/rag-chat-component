@@ -103,8 +103,8 @@ export const ChatComponent = () => {
       };
       setConversation((prev) => [...prev, aiMessage]);
 
-      for await (const chunk of readStreamableValue(output)) {
-        aiMessage.content += chunk;
+      for await (const delta of readStreamableValue(output)) {
+        aiMessage.content += delta;
         setConversation((prev) =>
           prev.map((msg) =>
             msg.id === aiMessage.id
