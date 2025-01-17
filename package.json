@@ -1,7 +1,7 @@
 {
   "name": "@upstash/rag-chat-component",
   "description": "Streaming Chat Component with Persistent History",
-  "version": "0.1.5-canary.3",
+  "version": "0.1.5-canary.4",
   "module": "index.ts",
   "main": "./dist/client/index.mjs",
   "types": "./dist/client/index.d.ts",
