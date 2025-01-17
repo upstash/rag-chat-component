@@ -14,7 +14,14 @@ import { ArrowUp, Bot, Loader2, X } from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
 import { readStreamableValue } from "ai/rsc";
 
-export const ChatComponent = () => {
+type ChatComponentProps = {
+  theme?: {
+    triggerButtonIcon?: React.ReactNode;
+    triggerButtonColor?: string;
+  };
+};
+
+export const ChatComponent = ({ theme }: ChatComponentProps) => {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [sessionId, setSessionId] = useState<string>("");
   const [input, setInput] = useState<string>("");
@@ -60,7 +67,6 @@ export const ChatComponent = () => {
       }
     };
 
-    console.log("fetching history");
     fetchHistory();
   }, []);
 
@@ -150,7 +156,7 @@ export const ChatComponent = () => {
       >
         {isUser ? (
           // User message
-          <div className="rounded-2xl bg-emerald-500 px-4 py-2 text-white">
+          <div className="rounded-2xl bg-black px-4 py-2 text-white">
             {message.content}
           </div>
         ) : (
@@ -182,12 +188,15 @@ export const ChatComponent = () => {
         className={cn(
           "fixed bottom-8 right-8 z-[9999] size-12",
           "flex items-center justify-center p-0",
-          "rounded-full bg-emerald-500 text-white shadow-xl",
+          "rounded-full text-white shadow-xl",
           "transition-all duration-300 ease-in-out",
           isOpen ? "scale-0 opacity-0" : "scale-100 opacity-100",
         )}
+        style={{
+          backgroundColor: theme?.triggerButtonColor ?? "#10b981", // default: emerald-500
+        }}
       >
-        <Bot size={28} />
+        {theme?.triggerButtonIcon ?? <Bot size={28} />}
       </Button>
 
       {/* >>> Chat Modal */}
@@ -291,7 +300,7 @@ export const ChatComponent = () => {
             type="submit"
             size="icon"
             className={cn(
-              "absolute bottom-8 right-8 z-10 bg-emerald-500",
+              "absolute bottom-8 right-8 z-10 bg-black",
               (isLoading || isStreaming) && "cursor-not-allowed opacity-50",
             )}
             disabled={isLoading || isStreaming}
