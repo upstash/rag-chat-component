@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "pnpm prettier --write ."
   },
   "dependencies": {
     "@upstash/rag-chat-component": "^0.1.5-canary.3",

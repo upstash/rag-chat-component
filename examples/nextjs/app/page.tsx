@@ -5,7 +5,7 @@ import { Chat } from "./components/chat";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-8 py-20 text-center sm:px-12 sm:py-24">
+    <div className="flex min-h-screen flex-col items-center justify-center px-8 py-12 text-center sm:px-12 sm:py-16">
       {/* page */}
       <main className="flex max-w-screen-md flex-col items-center">
         <Header />

@@ -29,9 +29,9 @@ export function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="rounded-3xl border border-emerald-900/20 bg-white/60 px-8 py-6 shadow-sm backdrop-blur">
+    <div className="rounded-3xl bg-emerald-900/10 px-8 py-6 backdrop-blur">
       <h3 className="font-display text-lg font-semibold">{title}</h3>
-      <p className="mt-1 opacity-80">{description}</p>
+      <p className="text-balance opacity-80">{description}</p>
     </div>
   );
 }
