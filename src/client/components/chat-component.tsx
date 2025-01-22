@@ -204,7 +204,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
         className={cn(
           "fixed bottom-8 right-8 z-50 w-[420px] antialiased",
           "rounded-2xl bg-white shadow-2xl",
-          "border border-zinc-300 text-black",
+          "border-2 border-zinc-500 text-left text-black",
           "transition-all duration-300",
           isOpen
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -212,38 +212,32 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
         )}
       >
         {/* Chat Header */}
-        <header className="rounded-t-2xl border-b border-b-zinc-100 bg-zinc-50 px-6 py-5">
-          {/* close button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-4 top-4 opacity-30 hover:bg-zinc-300 hover:opacity-100"
-            onClick={toggleChat}
-          >
-            <X size={20} strokeWidth="1.5" />
-          </Button>
+        <header className="flex items-center rounded-t-2xl border-b border-b-zinc-100 bg-zinc-50 px-6 py-5">
+          <h3 className="grow text-lg font-semibold">Chat Assistant</h3>
 
-          {/* header */}
-          <div>
-            <h3 className="text-lg font-semibold">Chat Assistant</h3>
-            <h5 className="inline-flex items-center gap-1 text-sm text-zinc-500">
-              Powered by{" "}
-              <a
-                href="http://upstash.com"
-                target="_blank"
-                className="underline"
-              >
-                Upstash
-              </a>{" "}
-              and{" "}
-              <a
-                href="http://together.ai"
-                target="_blank"
-                className="underline"
-              >
-                TogetherAI
-              </a>
-            </h5>
+          <div className="ml-auto flex shrink-0 items-center justify-end">
+            {/* clear button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
+              disabled={hasMessages}
+              onClick={() => {
+                handleClearHistory();
+              }}
+            >
+              Clear
+            </Button>
+            {/* close button */}
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="opacity-30 hover:bg-zinc-300 hover:opacity-100"
+              onClick={toggleChat}
+            >
+              <X size={20} strokeWidth="1.5" />
+            </Button>
           </div>
         </header>
 
@@ -311,19 +305,6 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
               <ArrowUp size={20} className="" />
             )}
           </Button>
-
-          {/* clear button */}
-          {/* <Button
-            variant="ghost"
-            size="sm"
-            className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
-            disabled={hasMessages}
-            onClick={() => {
-              handleClearHistory();
-            }}
-          >
-            Clear
-          </Button> */}
         </form>
       </div>
     </div>
