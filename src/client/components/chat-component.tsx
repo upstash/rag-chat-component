@@ -221,7 +221,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
               variant="ghost"
               size="sm"
               className="text-sm text-zinc-400 hover:bg-zinc-200 hover:text-red-500"
-              disabled={hasMessages}
+              disabled={!hasMessages}
               onClick={() => {
                 handleClearHistory();
               }}
@@ -271,7 +271,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
           <TextareaAutosize
             className={cn(
               "flex w-full rounded-3xl border bg-transparent px-4 py-3",
-              "focus:outline-none focus:ring-2 focus:ring-primary",
+              "focus:ring-primary focus:outline-none focus:ring-2",
               "disabled:cursor-not-allowed disabled:opacity-50",
               "resize-none",
             )}
