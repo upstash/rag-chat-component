@@ -32,7 +32,7 @@ export default function Header() {
       <div className="mt-8 flex items-center justify-center gap-2">
         <a
           className="flex h-10 items-center justify-center gap-2 rounded-full bg-emerald-900 px-4 font-medium text-white hover:opacity-60"
-          href="https://github.com/your-repo"
+          href="https://github.com/upstash/rag-chat-component"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -48,7 +48,9 @@ export default function Header() {
         </a>
         <a
           className="flex h-10 items-center justify-center rounded-full border-2 border-emerald-900/20 px-4 font-medium hover:border-emerald-900"
-          href="/docs"
+          href="https://github.com/upstash/rag-chat-component?tab=readme-ov-file#rag-chat-component"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Documentation
         </a>
