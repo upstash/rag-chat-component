@@ -123,7 +123,6 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
           ),
         );
       }
-      console.log(aiMessage, messageReceived);
 
       if (!messageReceived || !aiMessage.content.trim()) {
         setConversation((prev) => [
