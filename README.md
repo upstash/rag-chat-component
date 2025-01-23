@@ -148,15 +148,14 @@ You can add content to your RAG Chat component in several ways:
 <details>
 <summary>1. Using Upstash Vector SDK</summary>
 
-  Upstash has Vector SDKs in JS and Python. You can use those SDK to insert data to your Vector index.
-  
+Upstash has Vector SDKs in JS and Python. You can use those SDK to insert data to your Vector index.
+
 [Vector JS SDK](https://github.com/upstash/vector-js)
 
 [Vector Python SDK](https://github.com/upstash/vector-py)
 
 For other languages you can use [Vector REST API](https://upstash.com/docs/vector/api/get-started).
 
-  
 </details>
 
 <details>
@@ -180,6 +179,21 @@ If you are planning to insert your documentation (markdown files) to your Vector
 
 </details>
 
+### <details><summary>4. Troubleshooting</summary>
+#### Vercel Timeout Issues
+
+If you're deploying on Vercel and experiencing timeout issues, you can increase the function execution time limit by adding the following configuration to your `vercel.json`:
+```
+{
+  "functions": {
+    "app/**/*": {
+      "maxDuration": 30
+    }
+  }
+}
+```
+This extends the function timeout to 30 seconds, allowing more time for RAG operations to complete.
+</details>
 
 ## Contributing
 
