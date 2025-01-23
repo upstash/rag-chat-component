@@ -7,7 +7,6 @@ export const getHistoryClient = (): BaseMessageHistory => {
 	const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 	if (redisUrl && redisToken) {
-		console.log('Using Redis history implementation');
 		return new RedisHistory({
 			config: {
 				url: redisUrl,
@@ -16,6 +15,5 @@ export const getHistoryClient = (): BaseMessageHistory => {
 		});
 	}
 
-	console.log('Using in-memory history implementation');
 	return new InMemoryHistory();
 }

@@ -109,7 +109,11 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
       };
       setConversation((prev) => [...prev, aiMessage]);
 
+      let messageReceived = false;
       for await (const delta of readStreamableValue(output)) {
+        if (delta) {
+          messageReceived = true;
+        }
         aiMessage.content += delta;
         setConversation((prev) =>
           prev.map((msg) =>
@@ -118,6 +122,17 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
               : msg,
           ),
         );
+      }
+
+      if (!messageReceived || !aiMessage.content.trim()) {
+        setConversation((prev) => [
+          ...prev.slice(0, -1),
+          {
+            content: "No response received. Please try again.",
+            role: "assistant",
+            id: (Date.now() + 2).toString(),
+          },
+        ]);
       }
     } catch (error) {
       console.error("Error in AI response:", error);
