@@ -141,6 +141,22 @@ Default model is `meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo`. You can configur
 TOGETHER_MODEL="deepseek-ai/DeepSeek-V3"
 ```
 
+### 5. Additional Notes
+
+If you're deploying on Vercel and experiencing timeout issues, you can increase the function execution time limit by adding the following configuration to your `vercel.json`:
+```
+{
+  "functions": {
+    "app/**/*": {
+      "maxDuration": 30
+    }
+  }
+}
+```
+This extends the function timeout to 30 seconds, allowing more time for RAG operations to complete on serverless functions.
+</details>
+
+
 ## Adding Content
 
 You can add content to your RAG Chat component in several ways:
@@ -177,22 +193,6 @@ For testing purpose, you can add your data directly through the Upstash Vector C
 
 If you are planning to insert your documentation (markdown files) to your Vector index, then you can use [docs2vector](https://github.com/upstash/docs2vector/) tool.
 
-</details>
-
-### <details><summary>4. Troubleshooting</summary>
-#### Vercel Timeout Issues
-
-If you're deploying on Vercel and experiencing timeout issues, you can increase the function execution time limit by adding the following configuration to your `vercel.json`:
-```
-{
-  "functions": {
-    "app/**/*": {
-      "maxDuration": 30
-    }
-  }
-}
-```
-This extends the function timeout to 30 seconds, allowing more time for RAG operations to complete.
 </details>
 
 ## Contributing

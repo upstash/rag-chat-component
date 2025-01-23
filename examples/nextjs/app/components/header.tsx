@@ -10,13 +10,21 @@ export default function Header() {
         >
           Upstash
         </a>{" "}
-        and{" "}
+        ,{" "}
         <a
           href="http://together.ai"
           target="_blank"
           className="font-semibold underline"
         >
           TogetherAI
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://sdk.vercel.ai/"
+          target="_blank"
+          className="font-semibold underline"
+        >
+          Vercel AI SDK
         </a>
       </p>
 
