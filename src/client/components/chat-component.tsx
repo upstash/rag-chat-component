@@ -138,7 +138,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
     } catch (error) {
       console.error("Error in AI response:", error);
       setConversation((prev) => [
-        ...prev,
+        ...prev.slice(0, -1),
         {
           content: "An error occurred. Please try again.",
           role: "error",
