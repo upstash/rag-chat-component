@@ -1,5 +1,5 @@
 export type Message = {
-	role: "user" | "assistant";
+	role: "user" | "assistant" | "error"
 	content: string;
 	id: string
 }

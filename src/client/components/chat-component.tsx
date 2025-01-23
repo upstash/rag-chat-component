@@ -123,19 +123,28 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
           ),
         );
       }
+      console.log(aiMessage, messageReceived);
 
       if (!messageReceived || !aiMessage.content.trim()) {
         setConversation((prev) => [
           ...prev.slice(0, -1),
           {
             content: "No response received. Please try again.",
-            role: "assistant",
+            role: "error",
             id: (Date.now() + 2).toString(),
           },
         ]);
       }
     } catch (error) {
       console.error("Error in AI response:", error);
+      setConversation((prev) => [
+        ...prev,
+        {
+          content: "An error occurred. Please try again.",
+          role: "error",
+          id: (Date.now() + 3).toString(),
+        },
+      ]);
     } finally {
       setIsLoading(false);
       setIsStreaming(false);
@@ -162,6 +171,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
     const isLastMessage = index === conversation.length - 1;
     const showDots = isLastMessage && isStreaming;
     const isUser = message.role === "user";
+    const isError = message.role === "error";
 
     return (
       <div
@@ -173,6 +183,14 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
           // User message
           <div className="rounded-2xl bg-black px-4 py-2 text-white">
             {message.content}
+          </div>
+        ) : isError ? (
+          <div className="flex max-w-[90%] items-start gap-3">
+            <Bot size={28} strokeWidth={1.5} className="mt-2 shrink-0" />
+            <div className="relative rounded-2xl bg-red-50 px-4 py-2 text-red-600">
+              <span className="absolute -left-1 top-4 size-4 rotate-45 bg-inherit" />
+              {message.content}
+            </div>
           </div>
         ) : (
           // Assistant message

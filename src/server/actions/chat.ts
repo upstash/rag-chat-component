@@ -1,7 +1,7 @@
 "use server";
 
 import { Index } from "@upstash/vector"
-import { Redis } from "@upstash/redis"
+
 
 import { createOpenAI } from "@ai-sdk/openai"
 import { streamText } from "ai"
@@ -9,6 +9,11 @@ import { createStreamableValue, type StreamableValue } from "ai/rsc";
 import { DEFAULT_PROMPT } from "../constants";
 import type { Message } from "../lib/types";
 import { getHistoryClient } from "../lib/history/get-client";
+
+type StreamMessage = {
+  role: 'user' | 'assistant';
+  content: string;
+}
 
 const vectorIndex = new Index()
 
@@ -44,6 +49,13 @@ export const serverChat = async ({
     sessionId
   })
 
+  const serverMessages = messages
+    .filter(msg => msg.role !== 'error')
+    .map(msg => ({
+      role: msg.role,
+      content: msg.content
+    })) as StreamMessage[];
+
   const similarDocs = await searchSimilarDocs(userMessage.content, 5)
 
   const context = similarDocs.map(doc => doc.data).join("\n")
@@ -56,9 +68,9 @@ export const serverChat = async ({
 
   (async () => {
     const { textStream } = streamText({
-      model: together(process.env.TOGETHER_MODEL ?? "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"),
+      model: together(process.env.TOGETHER_MODEL ?? "deepseek-ai/DeepSeek-V3"),
       system,
-      messages: messages,
+      messages: serverMessages,
       async onFinish({ text }) {
         await history.addMessage({
           message: {
