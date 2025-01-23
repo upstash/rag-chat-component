@@ -19,7 +19,8 @@ const vectorIndex = new Index()
 
 const together = createOpenAI({
   apiKey: process.env.TOGETHER_API_KEY ?? "",
-  baseURL: "https://api.together.xyz/v1"
+  baseURL: "https://api.together.xyz/v1",
+
 })
 
 const searchSimilarDocs = async (data: string, topK: number) => {
@@ -71,6 +72,7 @@ export const serverChat = async ({
       model: together(process.env.TOGETHER_MODEL ?? "deepseek-ai/DeepSeek-V3"),
       system,
       messages: serverMessages,
+
       async onFinish({ text }) {
         await history.addMessage({
           message: {
@@ -80,7 +82,8 @@ export const serverChat = async ({
           },
           sessionId
         })
-      }
+      },
+
     })
 
     for await (const delta of textStream) {
