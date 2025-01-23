@@ -144,6 +144,7 @@ TOGETHER_MODEL="deepseek-ai/DeepSeek-V3"
 ### 5. Additional Notes
 
 If you're deploying on Vercel and experiencing timeout issues, you can increase the function execution time limit by adding the following configuration to your `vercel.json`:
+
 ```
 {
   "functions": {
@@ -153,9 +154,10 @@ If you're deploying on Vercel and experiencing timeout issues, you can increase 
   }
 }
 ```
-This extends the function timeout to 30 seconds, allowing more time for RAG operations to complete on serverless functions.
-</details>
 
+This extends the function timeout to 30 seconds, allowing more time for RAG operations to complete on serverless functions.
+
+</details>
 
 ## Adding Content
 
@@ -194,6 +196,10 @@ For testing purpose, you can add your data directly through the Upstash Vector C
 If you are planning to insert your documentation (markdown files) to your Vector index, then you can use [docs2vector](https://github.com/upstash/docs2vector/) tool.
 
 </details>
+
+## Roadmap
+
+- Integration with [QStash](https://upstash.com/docs/qstash/overall/getstarted) for infinite timout for serverless functions
 
 ## Contributing
 
