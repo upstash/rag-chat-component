@@ -236,7 +236,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
         className={cn(
           "fixed z-50 antialiased",
           // Mobile (default)
-          "bottom-0 left-0 right-0 h-[75vh] w-full",
+          "bottom-0 left-0 right-0 w-full",
           "rounded-t-2xl border-2 border-zinc-500",
           // Desktop
           "sm:!bottom-8 sm:!left-auto sm:!right-8 sm:!h-auto sm:!w-[420px]",
@@ -280,7 +280,8 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
 
         {/* Chat Body */}
         <ScrollArea
-          className="h-[calc(75vh-11rem)] overflow-auto overscroll-contain p-6 sm:h-[420px]"
+          // className="h-[calc(75vh-11rem)] overflow-auto overscroll-contain p-6 sm:h-[420px]"
+          className="h-[40vh] overflow-auto overscroll-contain p-6 sm:h-[420px]"
           ref={scrollAreaRef}
         >
           {/* empty message */}
