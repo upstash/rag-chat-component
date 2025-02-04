@@ -280,7 +280,6 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
 
         {/* Chat Body */}
         <ScrollArea
-          // className="h-[calc(75vh-11rem)] overflow-auto overscroll-contain p-6 sm:h-[420px]"
           className="h-[40vh] overflow-auto overscroll-contain p-6 sm:h-[420px]"
           ref={scrollAreaRef}
         >
