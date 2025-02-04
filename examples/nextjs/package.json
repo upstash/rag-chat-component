@@ -10,7 +10,7 @@
     "format": "pnpm prettier --write ."
   },
   "dependencies": {
-    "@upstash/rag-chat-component": "^0.2.1",
+    "@upstash/rag-chat-component": "^0.2.2-canary.2",
     "next": "15.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
