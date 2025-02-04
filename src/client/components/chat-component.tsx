@@ -213,7 +213,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
   const hasMessages = conversation.length > 0;
 
   return (
-    <div className="rcc">
+    <div className="ups-chat rcc">
       {/* >>> Trigger Button */}
       <Button
         onClick={toggleChat}
@@ -234,9 +234,14 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
       {/* >>> Chat Modal */}
       <div
         className={cn(
-          "fixed bottom-8 right-8 z-50 w-[420px] antialiased",
-          "rounded-2xl bg-white shadow-2xl",
-          "border-2 border-zinc-500 text-left text-black",
+          "fixed z-50 antialiased",
+          // Mobile (default)
+          "bottom-0 left-0 right-0 h-[75vh] w-full",
+          "rounded-t-2xl border-2 border-zinc-500",
+          // Desktop
+          "sm:!bottom-8 sm:!left-auto sm:!right-8 sm:!h-auto sm:!w-[420px]",
+          "sm:rounded-2xl sm:border-2",
+          "bg-white text-left text-black shadow-2xl",
           "transition-all duration-300",
           isOpen
             ? "pointer-events-auto translate-y-0 opacity-100"
@@ -275,7 +280,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
 
         {/* Chat Body */}
         <ScrollArea
-          className="h-[420px] overflow-auto overscroll-contain p-6"
+          className="h-[calc(75vh-11rem)] overflow-auto overscroll-contain p-6 sm:h-[420px]"
           ref={scrollAreaRef}
         >
           {/* empty message */}

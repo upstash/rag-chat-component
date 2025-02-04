@@ -37,7 +37,7 @@ export default function Header() {
         capabilities
       </h3>
 
-      <div className="mt-8 flex items-center justify-center gap-2">
+      <div className="mt-8 flex flex-col items-center justify-center gap-2 md:flex-row">
         <a
           className="flex h-10 items-center justify-center gap-2 rounded-full bg-emerald-900 px-4 font-medium text-white hover:opacity-60"
           href="https://github.com/upstash/rag-chat-component"
