@@ -297,7 +297,7 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
             {conversation.map(renderMessage)}
             {isLoading && !isStreaming && (
               <div className="flex items-center justify-center py-2">
-                <Loader2 className="animate-spin h-6 w-6" />
+                <Loader2 className="h-6 w-6 animate-spin" />
               </div>
             )}
           </div>
