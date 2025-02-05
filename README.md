@@ -197,6 +197,14 @@ If you are planning to insert your documentation (markdown files) to your Vector
 
 </details>
 
+## Development
+
+You can use the playground for development, by basically running the command in the root.
+
+```bash
+bun run playground
+```
+
 ## Roadmap
 
 - Integration with [QStash](https://upstash.com/docs/qstash/overall/getstarted) for infinite timout for serverless functions
