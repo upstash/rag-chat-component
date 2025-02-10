@@ -2,7 +2,7 @@ import { marked } from "marked";
 import { memo, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import { createHighlighter, type Highlighter } from "shiki";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import type { Components } from "react-markdown";
 import { Copy, Check } from "lucide-react";
 
@@ -35,33 +35,57 @@ function parseMarkdownIntoBlocks(markdown: string): string[] {
 
 const CodeBlock = memo(
   ({ language, code }: { language: string; code: string }) => {
-    const [html, setHtml] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
     const [isCopied, setIsCopied] = useState(false);
+    const codeContentRef = useRef<HTMLDivElement>(null);
+    const previousCodeLength = useRef(0);
 
     useEffect(() => {
-      const highlight = async () => {
+      const updateContent = async () => {
+        if (!codeContentRef.current) return;
+
         try {
+          // Only process the new content
+          const newContent = code.slice(previousCodeLength.current);
+          if (!newContent) return;
+
           const highlighter = await initShiki();
           const highlighted = await highlighter.codeToHtml(code, {
             lang: language || "text",
             theme: "github-dark",
           });
-          setHtml(highlighted);
+
+          // For the first render
+          if (previousCodeLength.current === 0) {
+            codeContentRef.current.innerHTML = highlighted;
+          } else {
+            // For subsequent updates, find the existing pre element
+            const preElement = codeContentRef.current.querySelector("pre");
+            if (preElement) {
+              // Get the code element inside pre
+              const codeElement = preElement.querySelector("code");
+              if (codeElement) {
+                // Instead of replacing innerHTML, append the new content
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = highlighted;
+                const newCodeElement = tempDiv.querySelector("code");
+                if (newCodeElement) {
+                  // Only append the new spans that were added
+                  const newSpans = Array.from(newCodeElement.children).slice(
+                    previousCodeLength.current,
+                  );
+                  codeElement.append(...newSpans);
+                }
+              }
+            }
+          }
+
+          previousCodeLength.current = code.length;
         } catch (error) {
-          // fallback for unsupported languages
-          const highlighter = await initShiki();
-          const highlighted = await highlighter.codeToHtml(code, {
-            lang: "text",
-            theme: "github-dark",
-          });
-          setHtml(highlighted);
-        } finally {
-          setIsLoading(false);
+          console.error("Error updating code content:", error);
         }
       };
 
-      highlight();
+      updateContent();
     }, [code, language]);
 
     const handleCopy = async () => {
@@ -96,8 +120,8 @@ const CodeBlock = memo(
           </button>
         </div>
         <div
-          className={`max-w-full overflow-x-auto bg-zinc-800 p-4 ${isLoading ? "animate-pulse" : ""}`}
-          dangerouslySetInnerHTML={{ __html: html }}
+          ref={codeContentRef}
+          className="max-w-full overflow-x-auto bg-zinc-800 p-4"
         />
       </div>
     );
