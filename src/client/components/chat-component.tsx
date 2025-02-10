@@ -42,7 +42,10 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
 
   const scrollToBottom = () => {
     if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+      lastMessageRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
     }
   };
 
@@ -77,10 +80,9 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
 
   useEffect(() => {
     if (isStreaming) {
-      const intervalId = setInterval(scrollToBottom, 100);
-      return () => clearInterval(intervalId);
+      scrollToBottom();
     }
-  }, [isStreaming]);
+  }, [isStreaming, conversation]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,18 +113,22 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
       setConversation((prev) => [...prev, aiMessage]);
 
       let messageReceived = false;
+
       for await (const delta of readStreamableValue(output)) {
         if (delta) {
           messageReceived = true;
         }
         aiMessage.content += delta;
-        setConversation((prev) =>
-          prev.map((msg) =>
+        setConversation((prev) => {
+          const newConversation = prev.map((msg) =>
             msg.id === aiMessage.id
               ? { ...msg, content: aiMessage.content }
               : msg,
-          ),
-        );
+          );
+          // Force immediate scroll after content update
+          setTimeout(scrollToBottom, 0);
+          return newConversation;
+        });
       }
 
       if (!messageReceived || !aiMessage.content.trim()) {
