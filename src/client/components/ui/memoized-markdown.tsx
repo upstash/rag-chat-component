@@ -121,7 +121,7 @@ const CodeBlock = memo(
         </div>
         <div
           ref={codeContentRef}
-          className="max-w-full overflow-x-auto bg-zinc-800 p-4"
+          className="max-w-full overflow-x-auto bg-[#24292E] px-4 py-2"
         />
       </div>
     );
@@ -165,7 +165,7 @@ export const MemoizedMarkdown = memo(
     const blocks = useMemo(() => parseMarkdownIntoBlocks(content), [content]);
 
     return (
-      <div className="w-full max-w-full overflow-hidden">
+      <div className="max-w-full overflow-hidden">
         {blocks.map((block, index) => (
           <MemoizedMarkdownBlock content={block} key={`${id}-block_${index}`} />
         ))}
