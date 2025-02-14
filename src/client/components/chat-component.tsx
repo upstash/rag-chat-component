@@ -13,6 +13,7 @@ import { Button } from "./ui/button";
 import { ArrowUp, Bot, Loader2, X } from "lucide-react";
 import TextareaAutosize from "react-textarea-autosize";
 import { readStreamableValue } from "ai/rsc";
+import { MemoizedMarkdown } from "./ui/memoized-markdown";
 
 type ChatComponentProps = {
   theme?: {
@@ -41,7 +42,10 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
 
   const scrollToBottom = () => {
     if (lastMessageRef.current) {
-      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+      lastMessageRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
     }
   };
 
@@ -76,10 +80,9 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
 
   useEffect(() => {
     if (isStreaming) {
-      const intervalId = setInterval(scrollToBottom, 100);
-      return () => clearInterval(intervalId);
+      scrollToBottom();
     }
-  }, [isStreaming]);
+  }, [isStreaming, conversation]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,18 +113,22 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
       setConversation((prev) => [...prev, aiMessage]);
 
       let messageReceived = false;
+
       for await (const delta of readStreamableValue(output)) {
         if (delta) {
           messageReceived = true;
         }
         aiMessage.content += delta;
-        setConversation((prev) =>
-          prev.map((msg) =>
+        setConversation((prev) => {
+          const newConversation = prev.map((msg) =>
             msg.id === aiMessage.id
               ? { ...msg, content: aiMessage.content }
               : msg,
-          ),
-        );
+          );
+          // Force immediate scroll after content update
+          setTimeout(scrollToBottom, 0);
+          return newConversation;
+        });
       }
 
       if (!messageReceived || !aiMessage.content.trim()) {
@@ -195,9 +202,9 @@ export const ChatComponent = ({ theme }: ChatComponentProps) => {
           // Assistant message
           <div className="flex max-w-[90%] items-start gap-3">
             <Bot size={28} strokeWidth={1.5} className="mt-2 shrink-0" />
-            <div className="relative rounded-2xl bg-zinc-100 px-4 py-2">
+            <div className="relative w-full rounded-2xl bg-zinc-100 px-4 py-2">
               <span className="absolute -left-1 top-4 size-4 rotate-45 bg-inherit" />
-              {message.content}
+              <MemoizedMarkdown content={message.content} id={message.id} />
               {showDots && (
                 <span className="ml-1 inline-block">
                   <span className="dots animate-pulse">...</span>
